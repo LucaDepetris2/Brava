@@ -1,0 +1,297 @@
+/* ================== SERVICIOS (PLANES) ================== */
+.planes {
+    position: relative;
+    background: #f7f7f7;
+    padding: clamp(32px, 5vw, 72px) 7vw;
+    overflow: hidden;
+}
+
+.planes__wrap {
+    position: relative;
+    z-index: 1;
+}
+
+.planes h2 {
+    text-align: center;
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    margin: 0 0 8px;
+}
+
+.planes__sub {
+    text-align: center;
+    margin: 0 0 8px;
+    color: #555;
+    font-size: clamp(.95rem, 1.2vw, 1.05rem);
+}
+
+/* Rótulo grande (no tapa badges) */
+.planes__label {
+    text-align: center;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: .08em;
+    color: #000;
+    opacity: .12;
+    margin: 6px 0 50px;
+    font-size: clamp(1.8rem, 9vw, 4rem);
+    line-height: 1;
+    position: relative;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* GRID fluida */
+.planes__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(16px, 2vw, 28px);
+    align-items: stretch;
+}
+
+/* ====== CARD ====== */
+.plan-card {
+    --bg: #ffffff;
+    --head: #222;
+    --accent: #e53e3e;
+    --shadow: 0 12px 28px rgba(0, 0, 0, .08);
+
+    background: var(--bg);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(8px);
+    transition: transform .25s ease, box-shadow .25s ease;
+    will-change: transform;
+
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+    min-height: 100%;
+}
+
+/* Pestaña negra */
+.plan-card__badge {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    font-weight: 800;
+    font-size: .82rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 8px 18px 6px;
+    min-width: 150px;
+    border-radius: 12px;
+    border: 4px solid #fff;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .2);
+    z-index: 5;
+    display: inline-block;
+}
+
+.plan-card__badge::after {
+    display: none;
+}
+
+/* Cabecera con “pico” */
+.plan-card__head {
+    position: relative;
+    isolation: isolate;
+    background: var(--accent);
+    color: #fff;
+    padding: 42px 18px 38px;
+    clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 88%, 0 68%);
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.plan-card__head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(110deg,
+            rgba(255, 255, 255, .06) 0%,
+            rgba(255, 255, 255, 0) 22%,
+            rgba(255, 255, 255, .14) 45%,
+            rgba(255, 255, 255, 0) 60%);
+    background-size: 200% 100%;
+    animation: shine 4s linear infinite;
+    z-index: -1;
+}
+
+@keyframes shine {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.plan-card__title {
+    margin: 0;
+    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    width: 100%;
+}
+
+/* Lista */
+.plan-card__list {
+    list-style: none;
+    margin: 22px 18px 0;
+    padding: 0 8px 4px;
+    display: grid;
+    gap: 10px;
+    color: #333;
+    font-size: .95rem;
+    flex: 1 1 auto;
+}
+
+.plan-card__list li {
+    position: relative;
+    padding-left: 22px;
+    line-height: 1.45;
+}
+
+.plan-card__list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    font-weight: 900;
+    color: var(--accent);
+}
+
+/* CTA */
+.plan-card__cta {
+    margin: 20px auto 24px;
+    width: clamp(150px, 40%, 200px);
+    padding: 12px 14px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    cursor: pointer;
+    color: #fff;
+    background: var(--accent);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.plan-card__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .16);
+    filter: brightness(1.02);
+}
+
+/* Hover card */
+.plan-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ====== PALETAS POR TEMA ====== */
+/* ====== PALETAS POR SECCIÓN (usando tus IDs) ====== */
+
+/* Web: colores originales */
+#servicios .plan--basic {
+    --accent: #E6007E;
+}
+
+/* magenta */
+#servicios .plan--plus {
+    --accent: #8BC34A;
+}
+
+/* lima */
+#servicios .plan--max {
+    --accent: #039BE5;
+}
+
+/* azul */
+
+/* Diseño: 4 items, uno por orden */
+#servicios-diseno .planes__grid>.plan-card:nth-child(1) {
+    --accent: #7B5CFF;
+}
+
+/* IDENTIDAD - violeta */
+#servicios-diseno .planes__grid>.plan-card:nth-child(2) {
+    --accent: #FF6F3D;
+}
+
+/* REDES - coral */
+#servicios-diseno .planes__grid>.plan-card:nth-child(3) {
+    --accent: #00BFA6;
+}
+
+/* IDENTIDAD+REDES - teal */
+#servicios-diseno .planes__grid>.plan-card:nth-child(4) {
+    --accent: #F5B700;
+}
+
+/* BRAND TOTAL - mostaza */
+
+
+/* ====== ENTRADA on-scroll ====== */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .planes {
+    padding: 28px 16px 40px;
+  }
+
+  .planes__label {
+    font-size: clamp(1.4rem, 18vw, 2.2rem);
+    opacity: .16;
+    margin-bottom: 28px;
+  }
+
+  .planes__grid {
+    grid-template-columns: 1fr !important; /* fuerza 1 columna */
+    gap: 32px; /* más separación entre cards */
+  }
+
+  .plan-card {
+    max-width: 500px;
+    margin: 0 auto;
+    transform: none !important; /* evita traslapes */
+  }
+
+  .plan-card__badge {
+    position: relative; /* que no se solape con la card anterior */
+    top: 0;
+    left: auto;
+    transform: none;
+    margin-bottom: 12px;
+  }
+
+  .plan-card__head {
+    padding-top: 28px; /* menos espacio para móviles */
+    text-align: center;
+  }
+
+  .plan-card__list {
+    margin: 18px 14px 0;
+    padding: 0 4px;
+  }
+
+  .plan-card__cta {
+    margin-top: 16px;
+  }
+}

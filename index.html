@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brava Estudio</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/logo.css" />
+  <link rel="stylesheet" href="css/header-nav.css" />
+  <link rel="stylesheet" href="css/inicio.css" />
+  <link rel="stylesheet" href="css/nosotras.css" />
+  <link rel="stylesheet" href="css/servicios.css" />
+  <link rel="stylesheet" href="css/portfolio.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/animaciones.css" />
+  <script src="js/servicios.js" defer></script>
+
+</head>
+
+<body>
+  <a href="#inicio" class="btn-subir" title="Subir">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24">
+      <path d="M12 4l-8 8h6v8h4v-8h6z" />
+    </svg>
+  </a>
+  <script>
+    document.addEventListener("scroll", function () {
+      const boton = document.querySelector(".btn-subir");
+      boton.style.display = window.scrollY > 200 ? "flex" : "none";
+    });
+  </script>
+
+  <div class="contenedor">
+    <header>
+      <h1 id="logo">Brava</h1>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#portafolio">Portafolio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotras">Nosotras</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li>
+            <a class="social-icon" href="https://wa.me/5493462559647" target="_blank" rel="noopener noreferrer">
+              <img src="img/iconowhastapp.png" alt="WhatsApp" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="social-icon" href="https://www.instagram.com/somosbravaestudio" target="_blank"
+              rel="noopener noreferrer">
+              <img src="img/iconoinstagram.png" alt="Instagram" width="23" height="23">
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="inicio">
+      <div class="inicio-texto">
+        <h2>¡Hola! Somos Brava</h2>
+        <p>Creemos en la <strong> evolución</strong> como camino, en el <strong> cambio </strong> como motor, y
+          en el <strong> diseño como el lenguaje </strong> que hace que las ideas sucedan.
+          Ideas con <strong>impulso</strong> con <strong>carácter</strong>, con el deseo profundo de
+          <strong>evolucionar</strong> lo que ya fue.
+          Damos <strong>identidad visual</strong> a todo lo que vibra, se cuestiona, se reinventa.
+          Le damos forma al cambio para hacerlo visible, tangible, inolvidable. <br>
+          Somos Brava Studio. Y damos forma a todo lo que quiere transformar el mundo.
+        </p>
+      </div>
+      <div class="inicio-imagen">
+        <img src="img/portadabrava.jpg" alt="Manos usando una laptop">
+      </div>
+    </section>
+
+    <section id="portafolio">
+      <div class="forma3"><img src="img/forma3.svg" alt="forma"></div>
+      <h2>Portafolio</h2>
+      <div class="portafolio-cuadricula">
+
+        <div class="portafolio-item">
+          <a href="#img1">
+            <img src="img/img_portfolio/disqueriaportfolio.jpg" alt="Proyecto 1">
+          </a>
+          <p class="portafolio-desc">Identidad Visual La Disquería</p>
+        </div>
+
+        <div class="portafolio-item">
+          <a href="#img2">
+            <img src="img/img_portfolio/paraguasportfolio.jpg" alt="Proyecto 2">
+          </a>
+          <p class="portafolio-desc">Intervención Gráfica en Paraguas</p>
+        </div>
+
+        <div class="portafolio-item">
+          <a href="#img3">
+            <img src="img/img_portfolio/botellaportfolio.jpg" alt="Proyecto 3">
+          </a>
+          <p class="portafolio-desc">Merch Botella Brava</p>
+        </div>
+
+        <div class="portafolio-item">
+          <a href="#img4">
+            <img src="img/img_portfolio/llaverosportfolio.jpg" alt="Proyecto 4">
+          </a>
+          <p class="portafolio-desc">Diseño de Llaveros</p>
+        </div>
+
+        <div class="portafolio-item">
+          <a href="#img5">
+            <img src="img/img_portfolio/Fridaportfolio.jpg" alt="Proyecto 5">
+          </a>
+          <p class="portafolio-desc">Vajilla intervenida Edición Frida</p>
+        </div>
+
+        <div class="portafolio-item">
+          <a href="#img6">
+            <img src="img/img_portfolio/tripticoportfolio.jpg" alt="Proyecto 6">
+          </a>
+          <p class="portafolio-desc">Diseño editorial Tríptico</p>
+        </div>
+
+      </div>
+    </section>
+    <!-- LIGHTBOXES -->
+    <article class="lightbox" id="img1">
+      <h2 class="sr-only">Proyecto: La Disquería</h2>
+      <a href="#portafolio" class="cerrar">×</a>
+      <img src="img/img_portfolio/disqueriaportfolio.jpg" alt="Proyecto: La Disquería">
+    </article>
+
+    <article class="lightbox" id="img2">
+      <h2 class="sr-only">Proyecto: Paraguas Intervenido</h2>
+      <a href="#portafolio" class="cerrar">×</a>
+      <img src="img/img_portfolio/paraguasportfolio.jpg" alt="Proyecto: Paraguas Intervenido">
+    </article>
+
+    <article class="lightbox" id="img3">
+      <h2 class="sr-only">Proyecto: Botella Brava</h2>
+      <a href="#portafolio" class="cerrar">×</a>
+      <img src="img/img_portfolio/botellaportfolio.jpg" alt="Proyecto: Botella Brava">
+    </article>
+
+    <article class="lightbox" id="img4">
+      <h2 class="sr-only">Proyecto: Llaveros</h2>
+      <a href="#portafolio" class="cerrar">×</a>
+      <img src="img/img_portfolio/llaverosportfolio.jpg" alt="Proyecto: Llaveros">
+    </article>
+
+    <article class="lightbox" id="img5">
+      <h2 class="sr-only">Proyecto: Vajilla Frida</h2>
+      <a href="#portafolio" class="cerrar">×</a>
+      <img src="img/img_portfolio/Fridaportfolio.jpg" alt="Proyecto: Vajilla Frida">
+    </article>
+
+    <article class="lightbox" id="img6">
+      <h2 class="sr-only">Proyecto: Tríptico Editorial</h2>
+      <a href="#portafolio" class="cerrar">×</a>
+      <img src="img/img_portfolio/tripticoportfolio.jpg" alt="Proyecto: Tríptico Editorial">
+    </article>
+
+    <!-- ====== SERVICIOS ====== -->
+    <section id="servicios" class="planes">
+      <div class="planes__wrap">
+        <h2>ELEGÍ EL PLAN QUE SE ADAPTE A TU PROYECTO</h2>
+        <p class="planes__label">WEB</p>
+
+
+        <div class="planes__grid">
+          <!-- PLAN BÁSICO -->
+          <article class="plan-card plan--basic reveal" data-plan="ONE PAGE">
+            <div class="plan-card__badge">PLAN BÁSICO</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">ONE PAGE</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>Diseño y desarrollo de una sola página con desplazamiento vertical</li>
+              <li>Hasta 5 secciones internas (ej. inicio, servicios, portfolio, testimonios, contacto)</li>
+              <li>Adaptado a móvil, tablet y escritorio (diseño responsive)</li>
+              <li>Integración de formulario de contacto</li>
+              <li>Botones a redes sociales</li>
+              <li>Carga de textos e imágenes provistos por el cliente</li>
+              <li>Optimización SEO básica (títulos, descripciones y palabras clave)</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="ONE PAGE">QUIERO INFO</button>
+          </article>
+
+          <!-- PLAN PLUS -->
+          <article class="plan-card plan--plus reveal" data-plan="MULTIPÁGINA">
+            <div class="plan-card__badge">PLAN PLUS</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">MULTIPÁGINA</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>Diseño y desarrollo de hasta 5 secciones independientes (ej. inicio, nosotros, servicios, portfolio,
+                contacto)</li>
+              <li>Diseño responsive para todos los dispositivos</li>
+              <li>Integración de formulario de contacto y Google Maps</li>
+              <li>Botones a redes sociales</li>
+              <li>Carga de textos e imágenes provistos por el cliente</li>
+              <li>Optimización SEO básica</li>
+              <li>Instalación y configuración en hosting y dominio del cliente</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="MULTIPÁGINA">QUIERO INFO</button>
+          </article>
+
+          <!-- PLAN MAX -->
+          <article class="plan-card plan--max reveal" data-plan="FULL WEB">
+            <div class="plan-card__badge">PLAN MAX</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">FULL WEB</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>Diseño y desarrollo de hasta 14 secciones</li>
+              <li>Diseño responsive adaptado a todos los dispositivos</li>
+              <li>Integración avanzada de formularios (contacto, presupuestos, suscripción)</li>
+              <li>Menú principal y submenús</li>
+              <li>Integración de redes sociales, chat en vivo y/o WhatsApp</li>
+              <li>Carga de textos, imágenes y videos provistos por el cliente</li>
+              <li>Optimización SEO en todas las páginas</li>
+              <li>Instalación en hosting y dominio del cliente</li>
+              <li>Capacitación breve para la autogestión de contenidos</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="FULL WEB">QUIERO INFO</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SERVICIOS ====== -->
+    <section id="servicios-diseno" class="planes">
+      <div class="planes__wrap">
+        <p class="planes__label">Diseño</p>
+        <div class="planes__grid">
+          <!-- PLAN BÁSICO -->
+          <article class="plan-card plan--basic reveal" data-plan="IDENTIDAD">
+            <div class="plan-card__badge">PACK LOGO</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">IDENTIDAD</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>Diseño o rediseño de logo</li>
+              <li>Versiones en color y monocromáticas</li>
+              <li>2 aplicaciones (tarjeta personal, indumentaria, etc.)</li>
+              <li>Manual de marca básico.</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="IDENTIDAD">QUIERO INFO</button>
+          </article>
+
+          <!-- PLAN PLUS -->
+          <article class="plan-card plan--plus reveal" data-plan="REDES">
+            <div class="plan-card__badge">PACK REDES</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">REDES</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>5 portadas para historias destacadas</li>
+              <li>3 plantillas para publicaciones en feed</li>
+              <li>3 plantillas para stories</li>
+              <li>2 portadas para reels</li>
+              <li>Iconografía de la marca para redes sociales (hasta 9)</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="REDES">QUIERO INFO</button>
+          </article>
+
+          <!-- PLAN MAX -->
+          <article class="plan-card plan--max reveal" data-plan="IDENTIDAD + REDES">
+            <div class="plan-card__badge">PACK PLUS</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">IDENTIDAD + REDES</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>Diseño o rediseño de logo (principal, variantes).</li>
+              <li>Versiones en color y monocromáticas</li>
+              <li>Selección de Tipografía y Paleta de colores.</li>
+              <li>2 aplicaciones</li>
+              <li>Diseño de 3 historias, 3 publicaciones feed y destacadas para instagram.</li>
+              <li>Manual de marca básico.</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="IDENTIDAD + REDES">QUIERO INFO</button>
+          </article>
+
+          <article class="plan-card plan--max reveal" data-plan="BRAND TOTAL">
+            <div class="plan-card__badge">PACK FULL BRAND</div>
+            <header class="plan-card__head">
+              <h3 class="plan-card__title">BRAND TOTAL</h3>
+            </header>
+
+            <ul class="plan-card__list">
+              <li>Diseño o rediseño de logo (principal, variantes y usos)</li>
+              <li>Tipografía y paleta de colores</li>
+              <li>Diseño de tarjetas de presentación (hasta 6 nombres)</li>
+              <li>Aplicaciones personalizadas: redes sociales, papelería, web, merchandising, tramas, estilo
+                fotográfico, cartelería (a definir con el cliente)</li>
+              <li>Manual de marca completo</li>
+            </ul>
+
+            <button class="plan-card__cta btn-wsp" data-plan="BRAND TOTAL">QUIERO INFO</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotras" class="equipo-section">
+      <!-- Elementos decorativos -->
+      <img src="img/deco-izq.png" class="decoracion decoracion-izquierda" alt="">
+      <img src="img/deco-der.png" class="decoracion decoracion-derecha" alt="">
+
+      <!-- Título -->
+      <h2>Nosotras</h2>
+
+      <!-- Contenedor de equipo -->
+      <div class="equipo-contenedor">
+        <div class="miembro-equipo">
+          <img src="img/flo-gomez.png" alt="Flo Gómez">
+          <h3>Flo Gómez</h3>
+          <p class="rol">Diseñadora Gráfica</p>
+          <p class="email">somosbravaestudio@gmail.com</p>
+          <p class="descripcion">La creatividad es mi motor. Apasionada por el diseño visual con impacto</p>
+        </div>
+        <div class="miembro-equipo">
+          <img src="img/juli-pace.png" alt="Juli Pace">
+          <h3>Juli Pace</h3>
+          <p class="rol">Diseñadora Gráfica</p>
+          <p class="email">somosbravaestudio@gmail.com</p>
+          <p class="descripcion">Me inspiran las ideas. Disfruto transformar conceptos en piezas únicas</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <div class="contacto-contenido">
+        <div class="contacto-info">
+          <p><i class="fas fa-map-marker-alt"></i> Av. Corrientes 2037, C1001 (CABA)</p>
+          <a href="mailto:holabrava@gmail.com">
+            <p><i class="fas fa-envelope"></i> holabrava@gmail.com</p>
+          </a>
+          <p><i class="fas fa-phone"></i> <a href="tel:+5491123456789">+54 9 11 2345 6789</a></p>
+          <div class="mapa-contenedor">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.8967912386866!2d-58.39958348478443!3d-34.60677278045869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccadd56a00c6d%3A0xc47e30d1e3e7f5e8!2sAv.%20Corrientes%202037%2C%20C1045%20AAG%2C%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1689366000000!5m2!1ses-419!2sar"></iframe>
+          </div>
+        </div>
+        <div class="contacto-formulario">
+          <form action="mailto:holabrava@gmail.com?subject=Consulta%20desde%20la%20web" method="POST">
+            <div class="grupo-formulario">
+              <label>Nombre*</label>
+              <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="grupo-formulario">
+              <label>Email*</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="grupo-formulario">
+              <label for="comentarios">Comentarios</label>
+              <textarea id="comentarios" name="comentarios" rows="5"></textarea>
+            </div>
+            <button type="submit">Enviar</button>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-text">
+        © 2025 Brava Estudio. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+
+</html>

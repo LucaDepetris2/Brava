@@ -1,0 +1,99 @@
+/* ========== TRANSICIONES Y ANIMACIONES ========== */
+button,
+a,
+img {
+    transition: all 0.3s ease;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-subir {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff4081;
+    /* color base */
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    /* Oculto por defecto */
+    z-index: 1000;
+    transition: transform 0.3s ease, background 0.3s ease;
+    animation: flotando 2s infinite ease-in-out;
+}
+
+.btn-subir:hover {
+    background: #C4F601;
+    /* cambia el color al pasar el mouse */
+    transform: scale(1.1);
+}
+
+/* Animación de flotación */
+@keyframes flotando {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox:target {
+    display: flex;
+}
+
+.cerrar {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    z-index: 1001;
+}
