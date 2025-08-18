@@ -47,7 +47,6 @@
     gap: clamp(16px, 2vw, 28px);
     align-items: stretch;
 }
-
 #servicios-diseno .planes__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -304,55 +303,52 @@
         cursor: pointer;
     }
 
-    .plan-card.open .plan-card__head {
-        padding-bottom: 90px;
-        /* 👈 solo abierto deja lugar al botón */
+    
+
+    /* Mostrar el botón solo en mobile (sin !important) */
+    .plan-card__toggle {
+        display: inline-block;
+        visibility: visible;
+        pointer-events: auto;
+
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        /* ajústalo si lo querés más abajo */
+        transform: translateX(-50%);
+        padding: .5rem 1.2rem;
+        border: 0;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: .8rem;
+        letter-spacing: .04em;
+        background: #000;
+        color: #fff;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
+        z-index: 3;
     }
-}
 
-/* Mostrar el botón solo en mobile (sin !important) */
-.plan-card__toggle {
-    display: inline-block;
-    visibility: visible;
-    pointer-events: auto;
+    /* Al abrir el plan, ocultar el botón (respaldo CSS por si algún estilo externo pisa al JS) */
+    .plan-card.open .plan-card__toggle {
+        display: none;
+    }
 
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    /* ajústalo si lo querés más abajo */
-    transform: translateX(-50%);
-    padding: .5rem 1.2rem;
-    border: 0;
-    border-radius: 999px;
-    font-weight: 800;
-    font-size: .8rem;
-    letter-spacing: .04em;
-    background: #000;
-    color: #fff;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
-    z-index: 3;
-}
+    /* Contenido colapsable controlado por JS */
+    .plan-card__list,
+    .plan-card__cta {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin-top: 0 !important;
+        transition: max-height .35s ease, opacity .25s ease;
+    }
 
-/* Al abrir el plan, ocultar el botón (respaldo CSS por si algún estilo externo pisa al JS) */
-.plan-card.open .plan-card__toggle {
-    display: none;
-}
+    .plan-card.open .plan-card__list,
+    .plan-card.open .plan-card__cta {
+        opacity: 1;
+    }
 
-/* Contenido colapsable controlado por JS */
-.plan-card__list,
-.plan-card__cta {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    margin-top: 0 !important;
-    transition: max-height .35s ease, opacity .25s ease;
-}
-
-.plan-card.open .plan-card__list,
-.plan-card.open .plan-card__cta {
-    opacity: 1;
-}
-
-.plan-card__list {
-    padding: 0 14px;
+    .plan-card__list {
+        padding: 0 14px;
+    }
 }
