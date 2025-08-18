@@ -297,7 +297,7 @@
     cursor: pointer;
 }
 
-/* ===== Acordeón: colapsable con max-height (estable en Safari) ===== */
+/* ===== Acordeón (mobile): max-height estable en Safari ===== */
 .plan-card__list,
 .plan-card__cta {
     max-height: 0;
@@ -343,7 +343,7 @@
         margin-bottom: 12px;
     }
 
-    /* Cabecera clickeable (opcional) */
+    /* Cabecera clickeable (si querés abrir desde la cabecera) */
     .plan-card__head {
         padding-top: 28px;
         padding-bottom: 28px;
@@ -356,10 +356,25 @@
     }
 }
 
-/* En desktop podés ocultar el botón si preferís */
+/* =================== DESKTOP (≥769px) =================== */
 @media (min-width:769px) {
     .plan-card__toggle {
-        display: none;
+        display: none !important;
+    }
+
+    /* SIEMPRE visible en desktop */
+    .plan-card__list,
+    .plan-card__cta {
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        -webkit-transition: none !important;
+        transition: none !important;
+    }
+
+    .plan-card.open .plan-card__list,
+    .plan-card.open .plan-card__cta {
+        opacity: 1 !important;
     }
 }
 
@@ -381,26 +396,49 @@
     }
 }
 
-@media (min-width:769px) {
-
-    /* ocultás el botón en desktop */
-    .plan-card__toggle {
-        display: none;
+/* 1) Evitar que la lista estire la card en mobile cuando está cerrada */
+@media (max-width:768px) {
+    .plan-card {
+        min-height: auto;
     }
 
-    /* SIEMPRE visible en desktop (sin animar altura) */
+    /* no fuerces alto en mobile */
+    .plan-card__list {
+        flex: 0 0 auto;
+    }
+
+    /* quita el flex:1 que estira */
+}
+
+/* 2) Acordeón: estados por defecto */
+.plan-card__list,
+.plan-card__cta {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    -webkit-transition: max-height .3s ease, opacity .2s ease;
+    transition: max-height .3s ease, opacity .2s ease;
+}
+
+.plan-card.open .plan-card__list,
+.plan-card.open .plan-card__cta {
+    opacity: 1;
+}
+
+/* 3) Desktop siempre expandido (sin animación de altura) */
+@media (min-width:769px) {
+    .plan-card__toggle {
+        display: none !important;
+    }
+
     .plan-card__list,
     .plan-card__cta {
-        max-height: none;
-        opacity: 1;
-        overflow: visible;
-        -webkit-transition: none;
-        transition: none;
-    }
-
-    /* el estado .open no importa en desktop, pero no hace daño */
-    .plan-card.open .plan-card__list,
-    .plan-card.open .plan-card__cta {
-        opacity: 1;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        -webkit-transition: none !important;
+        transition: none !important;
+        flex: 0 0 auto;
+        /* por si algún tema les da flex */
     }
 }
