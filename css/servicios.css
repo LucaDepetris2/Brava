@@ -352,3 +352,20 @@
         padding: 0 14px;
     }
 }
+
+/* CORRECTED iOS Accordion Fix */
+.plan-card__list,
+.plan-card__cta {
+  transition: max-height 0.5s ease-out, padding 0.5s ease-out, opacity 0.3s ease-in;
+}
+
+.plan-card.open .plan-card__list {
+  max-height: 500px; /* A safe, large value */
+  padding: 0 14px;
+  opacity: 1;
+}
+
+.plan-card.open .plan-card__cta {
+  max-height: 500px;
+  opacity: 1;
+}

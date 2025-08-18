@@ -39,25 +39,26 @@ function setupReveal() {
 /* ===== Acordeón Mobile ===== */
 const mqMobile = window.matchMedia('(max-width: 768px)');
 
+/* Update the setOpen function in your servicios.js file */
+
+/* Updated setOpen function to fix iOS animations */
 function setOpen(card, open) {
     const list = $('.plan-card__list', card);
     const cta = $('.plan-card__cta', card);
     const tog = $('.plan-card__toggle', card);
-    if (!list || !cta) return;
 
+    // This is the core change: we're only toggling the 'open' class.
+    card.classList.toggle('open', open);
+
+    // The rest of the logic for the toggle button and text remains the same.
     if (open) {
-        list.style.maxHeight = `${list.scrollHeight}px`;
-        cta.style.maxHeight = `${cta.scrollHeight}px`;
-        if (tog) tog.style.display = 'none';              // ocultar "VER DETALLE" al abrir
+        if (tog) tog.style.display = 'none';
     } else {
-        list.style.maxHeight = '0px';
-        cta.style.maxHeight = '0px';
-        if (tog) {                                         // restaurar botón al cerrar
+        if (tog) {
             tog.style.display = 'inline-block';
             tog.textContent = 'VER DETALLE';
         }
     }
-    card.classList.toggle('open', open);
 }
 
 function closeSiblings(card) {
