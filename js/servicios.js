@@ -47,19 +47,37 @@ function setOpen(card, open) {
     const cta = $('.plan-card__cta', card);
     const tog = $('.plan-card__toggle', card);
 
-    // This is the core change: we're only toggling the 'open' class.
     card.classList.toggle('open', open);
 
-    // The rest of the logic for the toggle button and text remains the same.
     if (open) {
+        // Medir altura real y asignar para animar
+        if (list) {
+            list.style.maxHeight = list.scrollHeight + 'px';
+            list.style.opacity = '1';
+        }
+        if (cta) {
+            cta.style.maxHeight = cta.scrollHeight + 'px';
+            cta.style.opacity = '1';
+        }
         if (tog) tog.style.display = 'none';
     } else {
+        // Reset para cerrar y permitir transición inversa
+        if (list) {
+            list.style.maxHeight = '';
+            list.style.opacity = '';
+        }
+        if (cta) {
+            cta.style.maxHeight = '';
+            cta.style.opacity = '';
+        }
         if (tog) {
             tog.style.display = 'inline-block';
             tog.textContent = 'VER DETALLE';
         }
     }
 }
+
+
 
 function closeSiblings(card) {
     const grid = card.closest('.planes__grid'); if (!grid) return;
