@@ -1,20 +1,3 @@
-/*
- * Refactored version of the original servicios.css with improved iOS support.
- *
- * Changes made:
- * - Added vendor‑prefixed declarations (`-webkit-`) for properties that are known
- *   to cause issues on older versions of iOS Safari (e.g. `transform`,
- *   `transition`, `clip-path`, and `animation`/`keyframes`).
- * - Unified transition timing functions for properties within the same rule.
- *   Safari has a bug when multiple timing functions are used on different
- *   properties【853734168265042†L43-L50】, so using a single cubic‑bezier
- *   function improves reliability across browsers.
- * - Added a `prefers-reduced-motion` media query to disable animations and
- *   transitions for users (and browsers) that have reduced motion enabled.
- * - Added `backface-visibility` to fix rendering glitches on iOS during
- *   complex transform animations.
- */
-
 /* ================== SERVICIOS (PLANES) ================== */
 .planes {
     position: relative;
@@ -83,7 +66,6 @@
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    /* Use vendor‑prefixed transform and transition for iOS */
     -webkit-transform: translateY(8px);
     transform: translateY(8px);
     -webkit-transition: -webkit-transform .25s ease, box-shadow .25s ease;
@@ -93,9 +75,6 @@
     overflow: visible;
     z-index: 1;
     min-height: 100%;
-    /* Prevent flickering on iOS */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
 /* Pestaña negra */
@@ -131,9 +110,7 @@
     isolation: isolate;
     background: var(--accent);
     color: #fff;
-    /* aumentamos el padding-bottom en mobile más abajo */
     padding: 42px 18px 38px;
-    /* Use vendor‑prefixed clip‑path for iOS */
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 88%, 0 68%);
     clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 88%, 0 68%);
     display: grid;
@@ -157,6 +134,7 @@
     0% {
         background-position: -200% 0;
     }
+
     100% {
         background-position: 200% 0;
     }
@@ -166,12 +144,13 @@
     0% {
         background-position: -200% 0;
     }
+
     100% {
         background-position: 200% 0;
     }
 }
 
-/* Título realmente centrado (bloque + posición) */
+/* Título */
 .plan-card__title {
     margin: 0 auto;
     font-size: clamp(1.2rem, 2.2vw, 1.7rem);
@@ -181,7 +160,6 @@
     display: inline-block;
     width: auto;
     justify-self: center;
-    /* fuerza centrado si hay más elementos en la cabecera */
 }
 
 /* Lista */
@@ -211,7 +189,7 @@
     color: var(--accent);
 }
 
-/* CTA (QUIERO INFO) – SIEMPRE en zona blanca */
+/* CTA */
 .plan-card__cta {
     margin: clamp(28px, 3.5vw, 48px) auto 24px;
     width: clamp(150px, 40%, 200px);
@@ -224,20 +202,17 @@
     color: #fff;
     background: var(--accent);
     box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
-    /* Use vendor‑prefixed transition */
     -webkit-transition: -webkit-transform .2s, box-shadow .2s, filter .2s;
     transition: transform .2s, box-shadow .2s, filter .2s;
     position: relative;
     z-index: 1;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
-.plan-card__head + .plan-card__list {
+.plan-card__head+.plan-card__list {
     margin-top: clamp(14px, 2vw, 22px);
 }
 
-.plan-card__head + .plan-card__cta {
+.plan-card__head+.plan-card__cta {
     margin-top: clamp(28px, 4vw, 48px);
 }
 
@@ -271,19 +246,19 @@
 
 /* azul    */
 
-#servicios-diseno .planes__grid > .plan-card:nth-child(1) {
+#servicios-diseno .planes__grid>.plan-card:nth-child(1) {
     --accent: #7B5CFF;
 }
 
-#servicios-diseno .planes__grid > .plan-card:nth-child(2) {
+#servicios-diseno .planes__grid>.plan-card:nth-child(2) {
     --accent: #FF6F3D;
 }
 
-#servicios-diseno .planes__grid > .plan-card:nth-child(3) {
+#servicios-diseno .planes__grid>.plan-card:nth-child(3) {
     --accent: #00BFA6;
 }
 
-#servicios-diseno .planes__grid > .plan-card:nth-child(4) {
+#servicios-diseno .planes__grid>.plan-card:nth-child(4) {
     --accent: #F5B700;
 }
 
@@ -292,10 +267,9 @@
     opacity: 0;
     -webkit-transform: translateY(24px);
     transform: translateY(24px);
-    /* Use the same timing function for all properties. Safari may mis-handle
-       multiple timing functions; using a single cubic-bezier improves support. */
-    -webkit-transition: opacity .6s cubic-bezier(.2, .7, .2, 1), -webkit-transform .6s cubic-bezier(.2, .7, .2, 1);
-    transition: opacity .6s cubic-bezier(.2, .7, .2, 1), transform .6s cubic-bezier(.2, .7, .2, 1);
+    -webkit-transition: opacity .6s ease, -webkit-transform .6s cubic-bezier(.2, .7, .2, 1);
+    transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1);
+    will-change: transform, opacity;
 }
 
 .reveal.is-visible {
@@ -304,12 +278,38 @@
     transform: translateY(0);
 }
 
-/* ===== BOTÓN "VER DETALLE" SOLO MOBILE (EN HTML) ===== */
-/* Oculto por defecto fuera de mobile (sin !important para que JS pueda esconderlo/mostrarlo) */
+/* ===== Botón "VER DETALLE" ===== */
 .plan-card__toggle {
-    display: none;
-    visibility: hidden;
-    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    margin: 12px auto 0;
+    padding: .55rem 1.1rem;
+    border: 0;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: .85rem;
+    letter-spacing: .04em;
+    background: #000;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
+    cursor: pointer;
+}
+
+/* ===== Acordeón: colapsable con max-height (estable en Safari) ===== */
+.plan-card__list,
+.plan-card__cta {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    -webkit-transition: max-height .3s ease, opacity .2s ease;
+    transition: max-height .3s ease, opacity .2s ease;
+}
+
+.plan-card.open .plan-card__list,
+.plan-card.open .plan-card__cta {
+    opacity: 1;
 }
 
 /* =================== MOBILE (≤768px) =================== */
@@ -343,89 +343,64 @@
         margin-bottom: 12px;
     }
 
-    /* Cabecera clickeable + espacio para el botón que flotará abajo */
+    /* Cabecera clickeable (opcional) */
     .plan-card__head {
         padding-top: 28px;
         padding-bottom: 28px;
-        /* espacio para el botón */
         cursor: pointer;
     }
 
-    /* Mostrar el botón solo en mobile (sin !important) */
+    /* El botón se muestra en mobile */
     .plan-card__toggle {
-        display: inline-block;
-        visibility: visible;
-        pointer-events: auto;
-
-        position: absolute;
-        left: 50%;
-        bottom: 10px;
-        /* ajústalo si lo querés más abajo */
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        padding: .5rem 1.2rem;
-        border: 0;
-        border-radius: 999px;
-        font-weight: 800;
-        font-size: .8rem;
-        letter-spacing: .04em;
-        background: #000;
-        color: #fff;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
-        z-index: 3;
+        display: inline-flex;
     }
+}
 
-    /* Al abrir el plan, ocultar el botón (respaldo CSS por si algún estilo externo pisa al JS) */
-    .plan-card.open .plan-card__toggle {
+/* En desktop podés ocultar el botón si preferís */
+@media (min-width:769px) {
+    .plan-card__toggle {
+        display: none;
+    }
+}
+
+/* Accesibilidad: respeta "reducir movimiento" */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal,
+    .plan-card,
+    .plan-card__list,
+    .plan-card__cta,
+    .plan-card__cta:hover,
+    .plan-card__head::before {
+        -webkit-animation: none !important;
+        animation: none !important;
+        -webkit-transition: none !important;
+        transition: none !important;
+        -webkit-transform: none !important;
+        transform: none !important;
+    }
+}
+
+@media (min-width:769px) {
+
+    /* ocultás el botón en desktop */
+    .plan-card__toggle {
         display: none;
     }
 
-    /* Contenido colapsable controlado por JS */
+    /* SIEMPRE visible en desktop (sin animar altura) */
     .plan-card__list,
     .plan-card__cta {
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        margin-top: 0 !important;
-        -webkit-transition: max-height .35s ease, opacity .25s ease;
-        transition: max-height .35s ease, opacity .25s ease;
+        max-height: none;
+        opacity: 1;
+        overflow: visible;
+        -webkit-transition: none;
+        transition: none;
     }
 
+    /* el estado .open no importa en desktop, pero no hace daño */
     .plan-card.open .plan-card__list,
     .plan-card.open .plan-card__cta {
         opacity: 1;
-    }
-
-    .plan-card__list {
-        padding: 0 14px;
-    }
-}
-
-@media (max-width:768px) {
-    .plan-card__list,
-    .plan-card__cta {
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        -webkit-transition: max-height .35s ease, opacity .25s ease;
-        transition: max-height .35s ease, opacity .25s ease;
-    }
-
-    .plan-card.open .plan-card__list,
-    .plan-card.open .plan-card__cta {
-        /* Solo controlamos la opacidad aquí; el max-height lo define JS */
-        opacity: 1;
-    }
-}
-
-/* ===== Reduced motion ===== */
-@media (prefers-reduced-motion: reduce) {
-    .plan-card,
-    .plan-card__cta,
-    .reveal {
-        -webkit-transition: none !important;
-        transition: none !important;
-        -webkit-animation: none !important;
-        animation: none !important;
     }
 }
