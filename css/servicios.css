@@ -40,7 +40,7 @@
     pointer-events: none;
 }
 
-/* GRID fluida */
+/* GRID */
 .planes__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -48,13 +48,12 @@
     align-items: stretch;
 }
 
-/* ====== CARD ====== */
+/* ===== CARD ===== */
 .plan-card {
-    --bg: #ffffff;
+    --bg: #fff;
     --head: #222;
     --accent: #e53e3e;
     --shadow: 0 12px 28px rgba(0, 0, 0, .08);
-
     background: var(--bg);
     border-radius: 14px;
     box-shadow: var(--shadow);
@@ -63,7 +62,6 @@
     transform: translateY(8px);
     transition: transform .25s ease, box-shadow .25s ease;
     will-change: transform;
-
     position: relative;
     overflow: visible;
     z-index: 1;
@@ -102,6 +100,7 @@
     isolation: isolate;
     background: var(--accent);
     color: #fff;
+    /* aumentamos el padding-bottom en mobile más abajo */
     padding: 42px 18px 38px;
     clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 88%, 0 68%);
     display: grid;
@@ -109,15 +108,12 @@
     text-align: center;
 }
 
+/* brillo */
 .plan-card__head::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(110deg,
-            rgba(255, 255, 255, .06) 0%,
-            rgba(255, 255, 255, 0) 22%,
-            rgba(255, 255, 255, .14) 45%,
-            rgba(255, 255, 255, 0) 60%);
+    background-image: linear-gradient(110deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, .14) 45%, rgba(255, 255, 255, 0) 60%);
     background-size: 200% 100%;
     animation: shine 4s linear infinite;
     z-index: -1;
@@ -125,21 +121,25 @@
 
 @keyframes shine {
     0% {
-        background-position: -200% 0;
+        background-position: -200% 0
     }
 
     100% {
-        background-position: 200% 0;
+        background-position: 200% 0
     }
 }
 
+/* Título realmente centrado (bloque + posición) */
 .plan-card__title {
-    margin: 0;
+    margin: 0 auto;
     font-size: clamp(1.2rem, 2.2vw, 1.7rem);
     font-weight: 800;
     line-height: 1.1;
     text-align: center;
-    width: 100%;
+    display: inline-block;
+    width: auto;
+    justify-self: center;
+    /* fuerza centrado si hay más elementos en la cabecera */
 }
 
 /* Lista */
@@ -169,9 +169,9 @@
     color: var(--accent);
 }
 
-/* CTA */
+/* CTA (QUIERO INFO) – SIEMPRE en zona blanca */
 .plan-card__cta {
-    margin: 20px auto 24px;
+    margin: clamp(28px, 3.5vw, 48px) auto 24px;
     width: clamp(150px, 40%, 200px);
     padding: 12px 14px;
     border: none;
@@ -182,7 +182,17 @@
     color: #fff;
     background: var(--accent);
     box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
-    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    transition: transform .2s, box-shadow .2s, filter .2s;
+    position: relative;
+    z-index: 1;
+}
+
+.plan-card__head+.plan-card__list {
+    margin-top: clamp(14px, 2vw, 22px);
+}
+
+.plan-card__head+.plan-card__cta {
+    margin-top: clamp(28px, 4vw, 48px);
 }
 
 .plan-card__cta:hover {
@@ -196,10 +206,7 @@
     transform: translateY(-6px);
 }
 
-/* ====== PALETAS POR TEMA ====== */
-/* ====== PALETAS POR SECCIÓN (usando tus IDs) ====== */
-
-/* Web: colores originales */
+/* ===== PALETAS ===== */
 #servicios .plan--basic {
     --accent: #E6007E;
 }
@@ -209,37 +216,30 @@
     --accent: #8BC34A;
 }
 
-/* lima */
+/* lima    */
 #servicios .plan--max {
     --accent: #039BE5;
 }
 
-/* azul */
+/* azul    */
 
-/* Diseño: 4 items, uno por orden */
 #servicios-diseno .planes__grid>.plan-card:nth-child(1) {
     --accent: #7B5CFF;
 }
 
-/* IDENTIDAD - violeta */
 #servicios-diseno .planes__grid>.plan-card:nth-child(2) {
     --accent: #FF6F3D;
 }
 
-/* REDES - coral */
 #servicios-diseno .planes__grid>.plan-card:nth-child(3) {
     --accent: #00BFA6;
 }
 
-/* IDENTIDAD+REDES - teal */
 #servicios-diseno .planes__grid>.plan-card:nth-child(4) {
     --accent: #F5B700;
 }
 
-/* BRAND TOTAL - mostaza */
-
-
-/* ====== ENTRADA on-scroll ====== */
+/* ===== ENTRADA on-scroll ===== */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -251,47 +251,99 @@
     transform: translateY(0);
 }
 
-@media (max-width: 768px) {
-  .planes {
-    padding: 28px 16px 40px;
-  }
+/* ===== BOTÓN "VER DETALLE" SOLO MOBILE (EN HTML) ===== */
+/* Oculto por defecto fuera de mobile (sin !important para que JS pueda esconderlo/mostrarlo) */
+.plan-card__toggle {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
 
-  .planes__label {
-    font-size: clamp(1.4rem, 18vw, 2.2rem);
-    opacity: .16;
-    margin-bottom: 28px;
-  }
+/* =================== MOBILE (≤768px) =================== */
+@media (max-width:768px) {
+    .planes {
+        padding: 28px 16px 40px;
+    }
 
-  .planes__grid {
-    grid-template-columns: 1fr !important; /* fuerza 1 columna */
-    gap: 32px; /* más separación entre cards */
-  }
+    .planes__label {
+        font-size: clamp(1.4rem, 18vw, 2.2rem);
+        opacity: .16;
+        margin-bottom: 28px;
+    }
 
-  .plan-card {
-    max-width: 500px;
-    margin: 0 auto;
-    transform: none !important; /* evita traslapes */
-  }
+    .planes__grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px;
+    }
 
-  .plan-card__badge {
-    position: relative; /* que no se solape con la card anterior */
-    top: 0;
-    left: auto;
-    transform: none;
-    margin-bottom: 12px;
-  }
+    .plan-card {
+        max-width: 520px;
+        margin: 0 auto;
+        transform: none !important;
+        overflow: hidden;
+    }
 
-  .plan-card__head {
-    padding-top: 28px; /* menos espacio para móviles */
-    text-align: center;
-  }
+    /* Badge no flotante */
+    .plan-card__badge {
+        position: relative;
+        top: 0;
+        left: auto;
+        transform: none;
+        margin-bottom: 12px;
+    }
 
-  .plan-card__list {
-    margin: 18px 14px 0;
-    padding: 0 4px;
-  }
+    /* Cabecera clickeable + espacio para el botón que flotará abajo */
+    .plan-card__head {
+        padding-top: 28px;
+        padding-bottom: 90px;
+        /* espacio para el botón */
+        cursor: pointer;
+    }
 
-  .plan-card__cta {
-    margin-top: 16px;
-  }
+    /* Mostrar el botón solo en mobile (sin !important) */
+    .plan-card__toggle {
+        display: inline-block;
+        visibility: visible;
+        pointer-events: auto;
+
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        /* ajústalo si lo querés más abajo */
+        transform: translateX(-50%);
+        padding: .5rem 1.2rem;
+        border: 0;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: .8rem;
+        letter-spacing: .04em;
+        background: #000;
+        color: #fff;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
+        z-index: 3;
+    }
+
+    /* Al abrir el plan, ocultar el botón (respaldo CSS por si algún estilo externo pisa al JS) */
+    .plan-card.open .plan-card__toggle {
+        display: none;
+    }
+
+    /* Contenido colapsable controlado por JS */
+    .plan-card__list,
+    .plan-card__cta {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin-top: 0 !important;
+        transition: max-height .35s ease, opacity .25s ease;
+    }
+
+    .plan-card.open .plan-card__list,
+    .plan-card.open .plan-card__cta {
+        opacity: 1;
+    }
+
+    .plan-card__list {
+        padding: 0 14px;
+    }
 }

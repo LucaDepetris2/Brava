@@ -1,68 +1,31 @@
-/* ========== INICIO ========== */
+/* Hero / Intro */
 #inicio {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1.2fr .9fr;
+    gap: clamp(1rem, 3vw, 2rem);
     align-items: center;
-    background-color: #efeeee;
-    padding: clamp(24px, 5vw, 60px) 20px;
-    gap: clamp(16px, 4vw, 40px);
-}
-
-.inicio-texto {
-    flex: 1;
-    text-align: left;
-    padding-right: 20px;
 }
 
 .inicio-texto h2 {
-    font-size: clamp(1.8rem, 3vw, 3rem);
-    color: #e53e3e;
-    margin-bottom: 15px;
-    font-weight: 700;
+    font-size: clamp(1.8rem, 2.2vw+1rem, 2.6rem)
 }
 
 .inicio-texto p {
-    font-size: clamp(.95rem, 1.1vw, 1.05rem);
-    line-height: 1.7;
-    color: #333;
+    font-size: clamp(1rem, .4vw + 1rem, 1.1rem);
+    line-height: 1.65
 }
 
-.inicio-imagen {
-    flex: .8;
+.inicio-texto strong {
+    font-weight: 800
 }
 
 .inicio-imagen img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
-    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: var(--shadow)
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     #inicio {
-        flex-direction: column;
-        padding: 28px 16px;
-    }
-
-    .inicio-texto {
-        padding-right: 0;
-    }
-
-    .inicio-imagen {
-        width: 100%;
-    }
-}
-
-/* >=1920px */
-@media (min-width:1920px) {
-    .inicio-imagen {
-        flex: 1;
-    }
-
-    .inicio-texto p {
-        font-size: 1.1rem;
+        grid-template-columns: 1fr
     }
 }

@@ -1,97 +1,114 @@
-/* ========== ENCABEZADO Y NAVEGACIÓN ========== */
+/* Header fijo */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 32px;
-    background: #C4F601;
     position: sticky;
     top: 0;
-    z-index: 100;
-}
-
-nav {
+    z-index: 60;
+    background: var(--primary);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+    padding: .6rem clamp(1rem, 3vw, 2rem);
     display: flex;
     align-items: center;
-    width: 100%;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
+/* Nav desktop */
 nav ul {
     display: flex;
-    gap: 40px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
     align-items: center;
-    flex-wrap: wrap;
+    gap: 1rem;
+    flex-wrap: wrap
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #222;
-    font-weight: 100;
-    font-size: 1rem;
-    transition: color .2s, background .2s;
-    padding: 6px 10px;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
+nav a {
+    padding: .55rem .8rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: var(--primary-ink)
 }
 
-nav ul li a:not(.social-icon):hover,
-nav ul li a:not(.social-icon).activo {
-    background: #222;
-    color: #fff;
+nav a:hover {
+    background: #111;
+    color: #fff
 }
 
+/* Iconos RRSS */
 .social-icon img {
-    transition: .3s ease;
+    display: block
 }
 
-/* Efecto hover en íconos redes */
-nav ul li a img:hover {
-    filter: brightness(0);
-    transition: filter .3s ease;
+/* WhatsApp flotante: reutiliza tu enlace existente del header */
+a.social-icon[href*="wa.me"] {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #25d366;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+    z-index: 95;
 }
 
-/* ====== RESPONSIVE ====== */
+a.social-icon[href*="wa.me"] img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1)
+}
 
-/* Mobile */
-@media (max-width: 768px) {
-    header {
-        padding: 10px 14px;
-        gap: 12px;
-        flex-wrap: wrap;
+/* Móvil: menú oculto/desplegable (usa body.nav-open desde JS) */
+@media (max-width:900px) {
+    nav {
+        position: fixed;
+        inset: 64px 0 auto 0;
+        background: var(--primary);
+        transform: translateY(-120%);
+        transition: .3s;
+        padding: 1rem
+    }
+
+    body.nav-open nav {
+        transform: translateY(0)
     }
 
     nav ul {
-        gap: 16px;
-        flex-wrap: nowrap;
-        /* No salto de línea */
-        overflow-x: auto;
-        /* Scroll horizontal suave */
-        -webkit-overflow-scrolling: touch;
-        padding: 6px 2px 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .4rem
     }
 
-    nav ul li a {
-        font-size: .95rem;
-        padding: 6px 8px;
+    nav li {
+        width: 100%
+    }
+
+    nav a {
+        display: block;
+        width: 100%;
+        background: #111;
+        color: #fff
+    }
+
+    /* Oculta el espacio original del li que contenía el WhatsApp ya que ahora es flotante */
+    nav li:has(a[href*="wa.me"]) {
+        display: none
     }
 }
 
-/* >=1600px (mejor aire en desktop grande) */
-@media (min-width:1600px) {
-    header {
-        padding: 18px 48px;
-    }
+/* Botón hamburguesa */
+.hamburger{
+  display:none;
+  border:0;
+  background:#111;
+  color:#fff;
+  border-radius:10px;
+  padding:.5rem .75rem;
+  font-size:1.1rem;
+}
 
-    nav ul {
-        gap: 48px;
-    }
-
-    nav ul li a {
-        font-size: 1.05rem;
-    }
+/* Mostrar en mobile junto al logo */
+@media (max-width:900px){
+  .hamburger{ display:inline-flex; align-items:center; justify-content:center }
 }

@@ -1,17 +1,23 @@
-/* ========== LOGO ========== */
-
+/* Logo como botón de menú en móvil */
 #logo {
-    background-image: url(../img/logo.png);
-    /* isologotipo */
+    background-image: url("../img/logo.png");
     width: 150px;
-    height: 50px;
+    height: 54px;
     background-size: contain;
     background-repeat: no-repeat;
     text-indent: -9999px;
-    overflow: hidden;
-    margin: auto;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-    line-height: 0;
+    margin: 0
+}
+
+/* Icono hamburguesa superpuesto al logo (no requiere HTML extra) */
+@media (max-width: 900px) {
+    #logo {
+        position: relative
+    }
+
+    body.nav-open #logo::after {
+        background:
+            linear-gradient(#111, #111) 0 50%/100% 3px no-repeat;
+        transform: rotate(90deg);
+    }
 }
