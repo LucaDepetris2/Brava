@@ -8,6 +8,7 @@
  */
 
 const WSP_NUMBER = '5491162903642';
+const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
 
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
@@ -27,14 +28,28 @@ function setupButtons() {
 
 /* ===== Reveal ===== */
 function setupReveal() {
-    const els = $$('.reveal'); if (!els.length) return;
-    if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-visible')); return; }
-    const io = new IntersectionObserver((entries, obs) =>
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } }),
-        { threshold: .15 }
-    );
+    const els = $$('.reveal');
+    if (!els.length) return;
+
+    // iOS o falta de IntersectionObserver => revelar directo
+    if (isIOS || !('IntersectionObserver' in window)) {
+        els.forEach(el => el.classList.add('is-visible'));
+        return;
+    }
+
+    // Observador con umbral suave (evita “parpadeos” en Safari)
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                obs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
     els.forEach(el => io.observe(el));
 }
+
 
 /* ===== Acordeón Mobile ===== */
 const mqMobile = window.matchMedia('(max-width: 768px)');
@@ -88,18 +103,30 @@ function setupAccordion() {
     ['#servicios .planes__grid', '#servicios-diseno .planes__grid'].forEach(sel => {
         $$(sel).forEach(grid => {
             if (!once(grid, 'accordion')) return;
-            grid.addEventListener('click', ev => {
+
+            const onActivate = ev => {
                 if (!mqMobile.matches) return;
+
                 const btn = ev.target.closest('.plan-card__toggle');
                 const headOrBadge = ev.target.closest('.plan-card__head, .plan-card__badge');
                 if (!btn && !headOrBadge) return;
 
-                const card = ev.target.closest('.plan-card'); if (!card) return;
+                // Evita doble firing (touchstart -> click)
+                if (ev.type === 'touchstart') {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                }
+
+                const card = ev.target.closest('.plan-card');
+                if (!card) return;
+
                 const willOpen = !card.classList.contains('open');
                 closeSiblings(card);
                 setOpen(card, willOpen);
-                // NOTA: no cambiamos el texto a "VER MENOS"; el botón se oculta al abrir
-            });
+            };
+
+            grid.addEventListener('click', onActivate);
+            grid.addEventListener('touchstart', onActivate, { passive: false });
         });
     });
 
@@ -112,14 +139,12 @@ function setupAccordion() {
                 const tog = $('.plan-card__toggle', card);
                 if (list) list.style.maxHeight = '';
                 if (cta) cta.style.maxHeight = '';
-                if (tog) {
-                    tog.style.display = 'inline-block';
-                    tog.textContent = 'VER DETALLE';
-                }
+                if (tog) { tog.style.display = 'inline-block'; tog.textContent = 'VER DETALLE'; }
             });
         });
     }
 }
+
 
 /* ===== Nav toggler (opcional) ===== */
 function setupNavToggler() {
