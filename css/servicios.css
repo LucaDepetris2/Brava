@@ -138,7 +138,7 @@
 /* Título */
 .plan-card__title {
     margin: 0 auto;
-    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
     font-weight: 800;
     line-height: 1.1;
     text-align: center;
@@ -146,6 +146,9 @@
     width: auto;
     justify-self: center;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Lista */
@@ -384,5 +387,181 @@
     .plan-card.open .plan-card__list,
     .plan-card.open .plan-card__cta {
         opacity: 1 !important;
+    }
+}
+
+/* ================== PERSONALIZACIÓN WEB Y DISEÑO ================== */
+
+/* Headers de los planes WEB y DISEÑO */
+#servicios .plan-card__head,
+#servicios-diseno .plan-card__head {
+    background: #e0e0e0 !important;
+    /* gris claro */
+    color: #000 !important;
+    /* texto negro para contraste */
+}
+
+/* Botones CTA de planes WEB */
+#servicios .plan-card__cta.btn-wsp {
+    background: #1506E9 !important;
+    /* azul */
+    color: #fff !important;
+}
+
+/* Botones CTA de planes DISEÑO */
+#servicios-diseno .plan-card__cta.btn-wsp {
+    background: #FF585B !important;
+    /* rojo coral */
+    color: #fff !important;
+}
+
+/* ================== DISEÑO DE PIEZAS ================== */
+.piezas {
+    position: relative;
+    background: #f7f7f7;
+    padding: clamp(36px, 5vw, 72px) 7vw;
+    overflow: hidden;
+}
+
+.piezas__wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.piezas h2 {
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: .02em;
+    margin: 0 0 10px;
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+}
+
+.piezas__sub {
+    text-align: center;
+    color: #555;
+    max-width: 920px;
+    margin: 0 auto clamp(24px, 3vw, 36px);
+    font-size: clamp(.95rem, 1.2vw, 1.05rem);
+    line-height: 1.5;
+}
+
+/* Grid de piezas */
+.piezas__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 2.2vw, 28px) clamp(24px, 3vw, 36px);
+    align-items: stretch;          /* estira ítems */
+    grid-auto-rows: 1fr;           /* filas con misma altura */
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.pieza {
+    background: #fff;
+    border-radius: 14px;
+    padding: clamp(16px, 2.2vw, 22px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .06);
+    text-align: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+    min-height: clamp(240px, 24vw, 280px);
+}
+
+.pieza:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .10);
+}
+
+.pieza__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px dashed #d7d7d7;
+}
+
+.pieza__icon img {
+    width: 44px;
+    height: 44px;
+}
+
+.pieza h3 {
+    font-size: clamp(.95rem, 1.4vw, 1.1rem);
+    font-weight: 800;
+    margin: 6px 0 4px;
+    color: #111;
+}
+
+.pieza p {
+    color: #444;
+    font-size: clamp(.88rem, 1vw, .96rem);
+    line-height: 1.45;
+}
+
+/* CTA */
+/* CTA */
+.piezas__cta {
+    display: block;              /* ocupa ancho disponible */
+    margin: 0 auto;              /* centra horizontal */
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    color: #fff;
+    background: #FF585B;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+    text-align: center;
+    max-width: 240px;            /* ancho fijo más prolijo */
+}
+
+
+/* Responsivo */
+@media (max-width: 1024px) {
+    .piezas__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .pieza {
+        min-height: clamp(220px, 30vw, 260px);
+    }
+}
+
+@media (max-width: 640px) {
+    .piezas {
+        padding: 24px 16px 36px;
+    }
+    .piezas__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .pieza {
+        min-height: auto;
+        padding: 16px;
+        border-radius: 12px;
+    }
+    .pieza__icon {
+        width: 70px;
+        height: 70px;
+    }
+    .pieza__icon img {
+        width: 40px;
+        height: 40px;
+    }
+    .piezas h2 {
+        font-size: clamp(1.2rem, 5.2vw, 1.6rem);
+    }
+    .piezas__sub {
+        font-size: .95rem;
+        margin-bottom: 18px;
+    }
+    .piezas__cta {
+        width: 100%;
+        max-width: 340px;
     }
 }
