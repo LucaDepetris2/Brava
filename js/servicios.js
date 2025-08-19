@@ -7,7 +7,7 @@
  * - Toggler de navbar (si existe), sin tocar HTML
  */
 
-const WSP_NUMBER = '5491162903642';
+const WSP_NUMBER = '5491140418564';
 
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
@@ -31,44 +31,29 @@ function setupButtons() {
 
 /* ===== Reveal (fallback si no hay IntersectionObserver) ===== */
 function setupReveal() {
-    const els = $$('.reveal');
-    if (!els.length) return;
-
-    if (!('IntersectionObserver' in window)) {
-        els.forEach(el => el.classList.add('is-visible'));
-        return;
-    }
-
+    const els = $$('.reveal'); if (!els.length) return;
+    if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-visible')); return; }
     const io = new IntersectionObserver((entries, obs) => {
         entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('is-visible');
-                obs.unobserve(e.target);
-            }
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
         });
     }, { threshold: 0.1 });
-
     els.forEach(el => io.observe(el));
 }
 
 /* ===== Acordeón solo en mobile ===== */
 const mqMobile = window.matchMedia('(max-width: 768px)');
-
-// mide altura real de un elemento
-function heightOf(el) {
-    return el ? el.scrollHeight : 0;
-}
+const heightOf = el => el ? el.scrollHeight : 0;
 
 function expandForDesktop(card) {
     const list = $('.plan-card__list', card);
     const cta = $('.plan-card__cta', card);
     card.classList.remove('open'); // estado neutral
-    if (list) { list.style.maxHeight = ''; list.style.opacity = '1'; }
-    if (cta) { cta.style.maxHeight = ''; cta.style.opacity = '1'; }
+    if (list) { list.style.maxHeight = ''; list.style.opacity = '1'; list.style.visibility = 'visible'; list.style.pointerEvents = 'auto'; list.setAttribute('aria-hidden', 'false'); }
+    if (cta) { cta.style.maxHeight = ''; cta.style.opacity = '1'; cta.style.visibility = 'visible'; cta.style.pointerEvents = 'auto'; cta.setAttribute('aria-hidden', 'false'); cta.removeAttribute('disabled'); }
 }
 
 function ensureToggleButton(card) {
-    // en tu HTML ya existe, pero por seguridad lo creamos si falta
     let btn = $('.plan-card__toggle', card);
     if (!btn) {
         btn = document.createElement('button');
@@ -92,13 +77,13 @@ function setOpen(card, open) {
     card.classList.toggle('open', open);
 
     if (open) {
-        if (list) { list.style.maxHeight = heightOf(list) + 'px'; list.style.opacity = '1'; }
-        if (cta) { cta.style.maxHeight = heightOf(cta) + 'px'; cta.style.opacity = '1'; }
+        if (list) { list.style.maxHeight = heightOf(list) + 'px'; list.style.opacity = '1'; list.style.visibility = 'visible'; list.style.pointerEvents = 'auto'; list.setAttribute('aria-hidden', 'false'); }
+        if (cta) { cta.style.maxHeight = heightOf(cta) + 'px'; cta.style.opacity = '1'; cta.style.visibility = 'visible'; cta.style.pointerEvents = 'auto'; cta.setAttribute('aria-hidden', 'false'); cta.removeAttribute('disabled'); }
         if (btn) { btn.textContent = 'VER MENOS'; btn.setAttribute('aria-expanded', 'true'); }
     } else {
-        // cerrar a 0px explícito evita “espacios fantasmas” en iOS
-        if (list) { list.style.maxHeight = '0px'; list.style.opacity = ''; }
-        if (cta) { cta.style.maxHeight = '0px'; cta.style.opacity = ''; }
+        // cerrar: nada visible ni clickeable (evita “espacio fantasma” y taps)
+        if (list) { list.style.maxHeight = '0px'; list.style.opacity = '0'; list.style.visibility = 'hidden'; list.style.pointerEvents = 'none'; list.setAttribute('aria-hidden', 'true'); }
+        if (cta) { cta.style.maxHeight = '0px'; cta.style.opacity = '0'; cta.style.visibility = 'hidden'; cta.style.pointerEvents = 'none'; cta.setAttribute('aria-hidden', 'true'); cta.setAttribute('disabled', ''); }
         if (btn) { btn.textContent = 'VER DETALLE'; btn.setAttribute('aria-expanded', 'false'); }
     }
 }
@@ -113,14 +98,9 @@ function setupAccordion() {
         $$(sel).forEach(grid => {
             if (!once(grid, 'accordion')) return;
 
-            // Init por card según breakpoint
             $$('.plan-card', grid).forEach(card => {
                 ensureToggleButton(card);
-                if (mqMobile.matches) {
-                    setOpen(card, false);   // mobile inicia cerrado
-                } else {
-                    expandForDesktop(card); // desktop siempre expandido
-                }
+                if (mqMobile.matches) { setOpen(card, false); } else { expandForDesktop(card); }
             });
 
             // Delegación SOLO click (no touchstart) -> no bloquea scroll en iOS
@@ -137,23 +117,23 @@ function setupAccordion() {
         });
     });
 
-    // Cambio de breakpoint: reset coherente
+    // Cambio de breakpoint
     if (once(window, 'accordion_mq')) {
         mqMobile.addEventListener('change', () => {
             $$('.plan-card').forEach(card => {
                 const btn = $('.plan-card__toggle', card);
                 if (mqMobile.matches) {
-                    setOpen(card, false); // al entrar a mobile, colapsado
+                    setOpen(card, false);
                     if (btn) { btn.textContent = 'VER DETALLE'; btn.setAttribute('aria-expanded', 'false'); }
                 } else {
-                    expandForDesktop(card); // al salir a desktop, expandido
+                    expandForDesktop(card);
                     if (btn) { btn.textContent = 'VER DETALLE'; btn.setAttribute('aria-expanded', 'false'); }
                 }
             });
         });
     }
 
-    // Re-medición solo en mobile (rotación, resize)
+    // Re-medición en mobile (rotación/resize)
     window.addEventListener('resize', () => {
         if (!mqMobile.matches) return;
         $$('.plan-card.open').forEach(card => {
@@ -173,7 +153,6 @@ function setupNavToggler() {
         || $('#site-nav') || $('.site-nav') || $('.navbar') || $('nav');
     if (!nav) return;
 
-    // Estado accesible
     if (!nav.hasAttribute('aria-hidden')) nav.setAttribute('aria-hidden', 'true');
     if (!toggle.hasAttribute('aria-controls')) toggle.setAttribute('aria-controls', nav.id || 'site-nav');
     toggle.setAttribute('aria-expanded', 'false');

@@ -66,9 +66,7 @@
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    -webkit-transform: translateY(8px);
     transform: translateY(8px);
-    -webkit-transition: -webkit-transform .25s ease, box-shadow .25s ease;
     transition: transform .25s ease, box-shadow .25s ease;
     will-change: transform;
     position: relative;
@@ -82,7 +80,6 @@
     position: absolute;
     top: -40px;
     left: 50%;
-    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     background: #000;
     color: #fff;
@@ -111,7 +108,6 @@
     background: var(--accent);
     color: #fff;
     padding: 42px 18px 38px;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 88%, 0 68%);
     clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 88%, 0 68%);
     display: grid;
     place-items: center;
@@ -125,19 +121,8 @@
     inset: 0;
     background-image: linear-gradient(110deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, .14) 45%, rgba(255, 255, 255, 0) 60%);
     background-size: 200% 100%;
-    -webkit-animation: shine 4s linear infinite;
     animation: shine 4s linear infinite;
     z-index: -1;
-}
-
-@-webkit-keyframes shine {
-    0% {
-        background-position: -200% 0;
-    }
-
-    100% {
-        background-position: 200% 0;
-    }
 }
 
 @keyframes shine {
@@ -160,6 +145,7 @@
     display: inline-block;
     width: auto;
     justify-self: center;
+    position: absolute;
 }
 
 /* Lista */
@@ -202,7 +188,6 @@
     color: #fff;
     background: var(--accent);
     box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
-    -webkit-transition: -webkit-transform .2s, box-shadow .2s, filter .2s;
     transition: transform .2s, box-shadow .2s, filter .2s;
     position: relative;
     z-index: 1;
@@ -217,7 +202,6 @@
 }
 
 .plan-card__cta:hover {
-    -webkit-transform: translateY(-2px);
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, .16);
     filter: brightness(1.02);
@@ -225,7 +209,6 @@
 
 /* Hover card */
 .plan-card:hover {
-    -webkit-transform: translateY(-6px);
     transform: translateY(-6px);
 }
 
@@ -239,12 +222,12 @@
     --accent: #8BC34A;
 }
 
-/* lima    */
+/* lima */
 #servicios .plan--max {
     --accent: #039BE5;
 }
 
-/* azul    */
+/* azul  */
 
 #servicios-diseno .planes__grid>.plan-card:nth-child(1) {
     --accent: #7B5CFF;
@@ -265,16 +248,13 @@
 /* ===== ENTRADA on-scroll ===== */
 .reveal {
     opacity: 0;
-    -webkit-transform: translateY(24px);
     transform: translateY(24px);
-    -webkit-transition: opacity .6s ease, -webkit-transform .6s cubic-bezier(.2, .7, .2, 1);
     transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1);
     will-change: transform, opacity;
 }
 
 .reveal.is-visible {
     opacity: 1;
-    -webkit-transform: translateY(0);
     transform: translateY(0);
 }
 
@@ -297,13 +277,12 @@
     cursor: pointer;
 }
 
-/* ===== Acordeón (mobile): max-height estable en Safari ===== */
+/* ===== Acordeón (mobile): estado colapsado por defecto ===== */
 .plan-card__list,
 .plan-card__cta {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    -webkit-transition: max-height .3s ease, opacity .2s ease;
     transition: max-height .3s ease, opacity .2s ease;
 }
 
@@ -331,28 +310,44 @@
 
     .plan-card {
         width: 100%;
+        min-height: auto;
     }
 
-    /* Badge no flotante */
     .plan-card__badge {
         position: relative;
         top: 0;
         left: auto;
-        -webkit-transform: none;
         transform: none;
         margin-bottom: 12px;
     }
 
-    /* Cabecera clickeable (si querés abrir desde la cabecera) */
     .plan-card__head {
         padding-top: 28px;
         padding-bottom: 28px;
         cursor: pointer;
     }
 
-    /* El botón se muestra en mobile */
     .plan-card__toggle {
         display: inline-flex;
+    }
+
+    /* >>> NUEVO: cuando NO está abierta, nada reservando espacio ni clickeable */
+    .plan-card:not(.open) .plan-card__list,
+    .plan-card:not(.open) .plan-card__cta {
+        visibility: hidden;
+        /* no se ve y no participa del layout de clics */
+        pointer-events: none;
+        /* no recibe taps */
+        margin-top: 0 !important;
+        /* evita el “hueco” blanco */
+        padding-top: 0 !important;
+    }
+
+    /* Sólo cuando está abierta volvemos a mostrar con margen */
+    .plan-card.open .plan-card__head+.plan-card__cta {
+        margin-top: clamp(28px, 4vw, 48px);
+        visibility: visible;
+        pointer-events: auto;
     }
 }
 
@@ -362,83 +357,32 @@
         display: none !important;
     }
 
-    /* SIEMPRE visible en desktop */
-    .plan-card__list,
-    .plan-card__cta {
+    .plan-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* la lista ocupa el espacio sobrante */
+    .plan-card__list {
+        flex: 1 1 auto;
         max-height: none !important;
         opacity: 1 !important;
         overflow: visible !important;
-        -webkit-transition: none !important;
         transition: none !important;
     }
 
+    /* el botón queda al fondo y todos se alinean */
+    .plan-card__cta {
+        margin-top: auto;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        transition: none !important;
+    }
+
+    /* todas las tarjetas "abiertas" por defecto */
     .plan-card.open .plan-card__list,
     .plan-card.open .plan-card__cta {
         opacity: 1 !important;
-    }
-}
-
-/* Accesibilidad: respeta "reducir movimiento" */
-@media (prefers-reduced-motion: reduce) {
-
-    .reveal,
-    .plan-card,
-    .plan-card__list,
-    .plan-card__cta,
-    .plan-card__cta:hover,
-    .plan-card__head::before {
-        -webkit-animation: none !important;
-        animation: none !important;
-        -webkit-transition: none !important;
-        transition: none !important;
-        -webkit-transform: none !important;
-        transform: none !important;
-    }
-}
-
-/* 1) Evitar que la lista estire la card en mobile cuando está cerrada */
-@media (max-width:768px) {
-    .plan-card {
-        min-height: auto;
-    }
-
-    /* no fuerces alto en mobile */
-    .plan-card__list {
-        flex: 0 0 auto;
-    }
-
-    /* quita el flex:1 que estira */
-}
-
-/* 2) Acordeón: estados por defecto */
-.plan-card__list,
-.plan-card__cta {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    -webkit-transition: max-height .3s ease, opacity .2s ease;
-    transition: max-height .3s ease, opacity .2s ease;
-}
-
-.plan-card.open .plan-card__list,
-.plan-card.open .plan-card__cta {
-    opacity: 1;
-}
-
-/* 3) Desktop siempre expandido (sin animación de altura) */
-@media (min-width:769px) {
-    .plan-card__toggle {
-        display: none !important;
-    }
-
-    .plan-card__list,
-    .plan-card__cta {
-        max-height: none !important;
-        opacity: 1 !important;
-        overflow: visible !important;
-        -webkit-transition: none !important;
-        transition: none !important;
-        flex: 0 0 auto;
-        /* por si algún tema les da flex */
     }
 }
