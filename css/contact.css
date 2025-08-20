@@ -145,3 +145,9 @@
 @media (min-width:1200px) {
   .contacto-contenido { max-width: 880px; }
 }
+
+
+.contacto-formulario p {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
