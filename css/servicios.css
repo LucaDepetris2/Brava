@@ -217,35 +217,35 @@
 
 /* ===== PALETAS ===== */
 #servicios .plan--basic {
-    --accent: #E6007E;
+    --accent: #1506E9;
 }
 
 /* magenta */
 #servicios .plan--plus {
-    --accent: #8BC34A;
+    --accent: #1506E9;
 }
 
 /* lima */
 #servicios .plan--max {
-    --accent: #039BE5;
+    --accent: #1506E9;
 }
 
 /* azul  */
 
 #servicios-diseno .planes__grid>.plan-card:nth-child(1) {
-    --accent: #7B5CFF;
+    --accent: #FF585B;
 }
 
 #servicios-diseno .planes__grid>.plan-card:nth-child(2) {
-    --accent: #FF6F3D;
+    --accent: #FF585B;
 }
 
 #servicios-diseno .planes__grid>.plan-card:nth-child(3) {
-    --accent: #00BFA6;
+    --accent: #FF585B;
 }
 
 #servicios-diseno .planes__grid>.plan-card:nth-child(4) {
-    --accent: #F5B700;
+    --accent: #FF585B;
 }
 
 /* ===== ENTRADA on-scroll ===== */
@@ -393,11 +393,17 @@
 /* ================== PERSONALIZACIÓN WEB Y DISEÑO ================== */
 
 /* Headers de los planes WEB y DISEÑO */
-#servicios .plan-card__head,
-#servicios-diseno .plan-card__head {
-    background: #e0e0e0 !important;
+#servicios .plan-card__head {
+    background: #1506E9 !important;
     /* gris claro */
-    color: #000 !important;
+    color: white !important;
+    /* texto negro para contraste */
+}
+
+#servicios-diseno .plan-card__head {
+    background: #FF585B !important;
+    /* gris claro */
+    color: white !important;
     /* texto negro para contraste */
 }
 
