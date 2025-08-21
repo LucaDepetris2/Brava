@@ -1,35 +1,66 @@
 // js/form.js
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".contacto-formulario form");
-    const msg = document.createElement("p");
-    msg.style.marginTop = "10px";
-    form.appendChild(msg);
+// Exporta una función que inicializa el form dentro de .contacto-formulario
+export function setupForm({
+    formSelector = '.contacto-formulario form',
+    okText = '✅ Mensaje enviado correctamente',
+    sendingText = 'Enviando...',
+    errorText = '❌ Error al enviar. Intenta de nuevo.',
+    connErrorText = '❌ Error de conexión. Revisa tu internet.'
+} = {}) {
+    const form = document.querySelector(formSelector);
+    if (!form) return;
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault(); // evita redirección
+    // Mensaje de estado (accesible)
+    let msg = form.querySelector('[data-form-msg]');
+    if (!msg) {
+        msg = document.createElement('p');
+        msg.setAttribute('data-form-msg', '');
+        msg.setAttribute('role', 'status');
+        msg.setAttribute('aria-live', 'polite');
+        msg.style.marginTop = '10px';
+        form.appendChild(msg);
+    }
 
-        msg.textContent = "Enviando...";
-        msg.style.color = "#555";
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    async function onSubmit(e) {
+        e.preventDefault();
+
+        // Honeypot soft: si existe _gotcha y tiene valor, no enviamos
+        const honeypot = form.querySelector('input[name="_gotcha"]');
+        if (honeypot && honeypot.value) return;
+
+        msg.textContent = sendingText;
+        msg.style.color = '#555';
+        submitBtn?.setAttribute('disabled', '');
+        submitBtn?.setAttribute('aria-busy', 'true');
 
         try {
             const formData = new FormData(form);
-            const response = await fetch(form.action, {
-                method: form.method,
+            const res = await fetch(form.action, {
+                method: form.method || 'POST',
                 body: formData,
-                headers: { "Accept": "application/json" },
+                headers: { Accept: 'application/json' },
             });
 
-            if (response.ok) {
-                msg.textContent = "✅ Mensaje enviado correctamente";
-                msg.style.color = "green";
+            if (res.ok) {
+                msg.textContent = okText;
+                msg.style.color = 'green';
                 form.reset();
             } else {
-                msg.textContent = "❌ Error al enviar. Intenta de nuevo.";
-                msg.style.color = "red";
+                msg.textContent = errorText;
+                msg.style.color = 'red';
             }
-        } catch (error) {
-            msg.textContent = "❌ Error de conexión. Revisa tu internet.";
-            msg.style.color = "red";
+        } catch {
+            msg.textContent = connErrorText;
+            msg.style.color = 'red';
+        } finally {
+            submitBtn?.removeAttribute('disabled');
+            submitBtn?.removeAttribute('aria-busy');
         }
-    });
-});
+    }
+
+    // Evita doble binding si re-ejecutás setupForm()
+    form.removeEventListener('submit', onSubmit);
+    form.addEventListener('submit', onSubmit, { passive: false });
+}

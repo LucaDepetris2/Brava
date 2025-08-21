@@ -59,8 +59,8 @@ img {
 html {
     scroll-behavior: smooth;
 }
-
-/* Lightbox */
+/*
+/* Lightbox
 .lightbox {
     display: none;
     position: fixed;
@@ -97,3 +97,4 @@ html {
     text-decoration: none;
     z-index: 1001;
 }
+*/

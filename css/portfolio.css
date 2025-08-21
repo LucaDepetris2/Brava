@@ -1,6 +1,13 @@
-/* Portafolio: grid + lightbox por :target */
+/* ================== PORTAFOLIO (grid + lightbox) ================== */
+
+/* Bloqueo de scroll cuando se abre el lightbox (lo añade servicios.js) */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Sección */
 #portafolio {
-    position: relative
+    position: relative;
 }
 
 #portafolio .forma3 {
@@ -8,14 +15,15 @@
     left: 0;
     top: -40px;
     z-index: 0;
-    opacity: .25
+    opacity: .25;
 }
 
 #portafolio h2 {
     position: relative;
-    z-index: 1
+    z-index: 1;
 }
 
+/* GRID base (desktop por defecto) */
 .portafolio-cuadricula {
     position: relative;
     z-index: 1;
@@ -25,25 +33,36 @@
     gap: clamp(8px, .8vw, 16px);
 }
 
+/* Ítem */
 .portafolio-item {
     position: relative;
     overflow: hidden;
     border-radius: 14px;
     box-shadow: var(--shadow);
-    background: #eaeaea
+    background: #eaeaea;
 }
 
+/* El enlace ocupa todo el ítem y la imagen lo rellena */
+.portafolio-item>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.portafolio-item>a img,
 .portafolio-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .5s ease
+    transition: transform .5s ease;
 }
 
+/* Hover (solo tendrá efecto en desktop) */
 .portafolio-item:hover img {
-    transform: scale(1.06)
+    transform: scale(1.06);
 }
 
+/* Etiqueta/placa opcional */
 .portafolio-desc {
     position: absolute;
     left: 10px;
@@ -52,56 +71,84 @@
     border-radius: 999px;
     background: rgba(0, 0, 0, .6);
     color: #fff;
-    font-size: .85rem
+    font-size: .85rem;
 }
 
-/* Distribución tipo maqueta */
-.portafolio-item:nth-child(1) {
-    grid-column: span 4
-}
+/* ---- Distribución tipo maqueta: SOLO desktop ---- */
+@media (min-width: 901px) {
+    .portafolio-item:nth-child(1) {
+        grid-column: span 4;
+    }
 
-.portafolio-item:nth-child(2) {
-    grid-column: span 3
-}
+    .portafolio-item:nth-child(2) {
+        grid-column: span 3;
+    }
 
-.portafolio-item:nth-child(3) {
-    grid-column: span 5
-}
+    .portafolio-item:nth-child(3) {
+        grid-column: span 5;
+    }
 
-.portafolio-item:nth-child(4) {
-    grid-column: span 3
-}
+    .portafolio-item:nth-child(4) {
+        grid-column: span 3;
+    }
 
-.portafolio-item:nth-child(5) {
-    grid-column: span 6
-}
+    .portafolio-item:nth-child(5) {
+        grid-column: span 6;
+    }
 
-.portafolio-item:nth-child(6) {
-    grid-column: span 3
-}
-
-@media (max-width:1200px) {
-    .portafolio-cuadricula {
-        grid-auto-rows: 22vw
+    .portafolio-item:nth-child(6) {
+        grid-column: span 3;
     }
 }
 
-@media (max-width:900px) {
+/* Ajuste intermedio */
+@media (max-width: 1200px) {
+    .portafolio-cuadricula {
+        grid-auto-rows: 22vw;
+    }
+}
+
+/* ---- MOBILE: 2 columnas con thumbs iguales ---- */
+@media (max-width: 900px) {
     .portafolio-cuadricula {
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 44vw;
+        grid-auto-rows: unset;
+        /* no fuerces alto por fila */
+        gap: 14px;
     }
 
     .portafolio-item {
-        grid-column: auto
+        grid-column: auto;
+        /* ignora los spans de desktop */
+        aspect-ratio: 4 / 3;
+        /* formato apaisado como el mockup */
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
+        /* marco blanco como tarjeta */
+        padding: 8px;
+        /* respiro interno */
+        box-shadow: var(--shadow);
+    }
+
+    .portafolio-item img {
+        border-radius: 12px;
+        /* esquinas suaves en la imagen */
+        transform: none !important;
+        /* evita zoom hover en touch */
     }
 
     .portafolio-desc {
-        font-size: .78rem
+        display: none;
     }
+
+    #portafolio .forma3 {
+        display: none;
+}
+    /* solo imagen en mobile */
 }
 
-/* Lightbox con tus <article class="lightbox" id="img#"> */
+/* ---------------- LIGHTBOX ---------------- */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -128,13 +175,16 @@
 }
 
 .lightbox img {
-    max-width: min(92vw, 1600px);
-    max-height: 84vh;
-    border-radius: 10px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, .5)
+    max-width: 92vw;
+    max-height: 90vh;
+    object-fit: contain;
+    /* proporción perfecta */
+    border-radius: 0;
+    /* quita esquinas redondeadas */
+    box-shadow: none;
 }
 
 .lightbox:target {
     opacity: 1;
-    pointer-events: auto
+    pointer-events: auto;
 }

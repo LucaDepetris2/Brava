@@ -191,3 +191,26 @@ if (document.readyState === 'loading') {
 } else {
     initServicios();
 }
+
+/* ===== BLOQUEO DE SCROLL PARA LIGHTBOX (fallback sin :has) ===== */
+(function () {
+    const isLbHash = () => /^#img\d+$/i.test(location.hash); // ids tipo #img1, #img2...
+    const lock = () => document.body.classList.add('no-scroll');
+    const unlock = () => document.body.classList.remove('no-scroll');
+
+    function syncScrollLock() {
+        isLbHash() ? lock() : unlock();
+    }
+
+    // Cuando se hace click en una miniatura (#imgN), esperamos al cambio de hash
+    document.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href^="#img"]');
+        if (a) requestAnimationFrame(syncScrollLock);
+    });
+
+    // Cerrar con la X (enlace que vuelve a #portafolio) o al navegar
+    window.addEventListener('hashchange', syncScrollLock);
+
+    // Estado inicial por si llegan con hash
+    syncScrollLock();
+})();
