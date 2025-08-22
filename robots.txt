@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://brava-estudio.com/sitemap.xml
+Sitemap: https://www.brava-estudio.com/sitemap.xml
