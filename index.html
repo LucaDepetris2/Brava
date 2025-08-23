@@ -15,7 +15,6 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://www.brava-estudio.com/" />
 
-
   <!-- Idioma/país -->
   <meta http-equiv="content-language" content="es-AR" />
 
@@ -26,7 +25,6 @@
   <meta property="og:url" content="https://brava-estudio.com/" />
   <meta property="og:site_name" content="Brava Estudio" />
   <meta property="og:locale" content="es_LA" />
-  <!-- Reemplazá la ruta por tu imagen pública 1200x630 -->
   <meta property="og:image" content="https://brava-estudio.com/img/og-cover.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,21 +38,20 @@
   <!-- Robots (seo) -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
-  <!-- Hreflang (idioma/país) -->
+  <!-- Hreflang -->
   <link rel="alternate" hreflang="es-AR" href="https://brava-estudio.com/">
   <link rel="alternate" hreflang="x-default" href="https://brava-estudio.com/">
 
-  <!-- (Opcional) Verificación de Google Search Console: reemplazá el content por el tuyo -->
+  <!-- Verificación Google Search Console -->
   <meta name="google-site-verification" content="PEGA_AQUI_TU_TOKEN_DE_SEARCH_CONSOLE">
 
-
-  <!-- Favicons / PWA mínimos -->
+  <!-- Favicons / PWA -->
   <link rel="icon" href="img/favicon brava.png" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- (Opcional: performance de fuentes) -->
+  <!-- Performance fuentes -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -100,16 +97,75 @@
   }
   </script>
 
-  <!-- Datos estructurados: ItemList de planes -->
+  <!-- Datos estructurados: ItemList de servicios web -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"ItemList",
-    "name":"Planes de servicios",
+    "name":"Planes de servicios web",
+    "url":"https://brava-estudio.com/#servicios",
     "itemListElement":[
-      {"@type":"Product","name":"ONE PAGE","description":"Sitio one page responsive con formulario de contacto"},
-      {"@type":"Product","name":"MULTIPÁGINA","description":"Sitio multipágina con hasta 5 secciones"},
-      {"@type":"Product","name":"FULL WEB","description":"Sitio completo con hasta 14 secciones"}
+      {
+        "@type":"Service",
+        "name":"ONE PAGE",
+        "serviceType":"Diseño y desarrollo web",
+        "description":"Sitio one page responsive con formulario de contacto",
+        "provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},
+        "areaServed":"AR"
+      },
+      {
+        "@type":"Service",
+        "name":"MULTIPÁGINA",
+        "serviceType":"Diseño y desarrollo web",
+        "description":"Sitio multipágina con hasta 5 secciones",
+        "provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},
+        "areaServed":"AR"
+      },
+      {
+        "@type":"Service",
+        "name":"FULL WEB",
+        "serviceType":"Diseño y desarrollo web",
+        "description":"Sitio completo con hasta 14 secciones",
+        "provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},
+        "areaServed":"AR"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Datos estructurados: ItemList de packs de diseño -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"Packs de diseño",
+    "url":"https://brava-estudio.com/#servicios-diseno",
+    "itemListElement":[
+      {"@type":"Service","name":"IDENTIDAD","serviceType":"Diseño de identidad visual","description":"Logo, versiones, aplicaciones y manual básico","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"REDES","serviceType":"Diseño de redes sociales","description":"Plantillas, portadas y piezas gráficas para redes","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"IDENTIDAD + REDES","serviceType":"Branding completo","description":"Logo + redes + aplicaciones y manual básico","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"BRAND TOTAL","serviceType":"Branding integral","description":"Logo, redes, papelería, aplicaciones personalizadas y manual completo","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"}
+    ]
+  }
+  </script>
+
+  <!-- Datos estructurados: ItemList de diseño de piezas -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"Diseño de piezas",
+    "url":"https://brava-estudio.com/#servicios-piezas",
+    "itemListElement":[
+      {"@type":"Service","name":"Etiquetado","serviceType":"Diseño gráfico","description":"Diseños para destacar identidad e información de productos","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Packaging de Producto","serviceType":"Diseño gráfico","description":"Soluciones creativas para envases, cajas, bolsas","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Arte Editorial","serviceType":"Diseño gráfico","description":"Portadas y contenidos en papel o digital","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Banners, Flyers & Newsletters","serviceType":"Diseño gráfico","description":"Material visual para campañas y eventos","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Animaciones Simples","serviceType":"Diseño gráfico","description":"Animaciones básicas de logos y elementos gráficos","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Ilustración Vectorial","serviceType":"Diseño gráfico","description":"Gráficos escalables y de alta calidad","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Aplicaciones sobre Marca Existente","serviceType":"Diseño gráfico","description":"Extensión de identidad a nuevas piezas","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Tarjetas / Invitaciones","serviceType":"Diseño gráfico","description":"Diseño de presentaciones profesionales y creativas","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"},
+      {"@type":"Service","name":"Modelado de Logo 3D","serviceType":"Diseño gráfico","description":"Logotipos en 3D con volumen y realismo","provider":{"@type":"Organization","name":"Brava Estudio","url":"https://brava-estudio.com/"},"areaServed":"AR"}
     ]
   }
   </script>
@@ -120,7 +176,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-DFCQHEZ4FL');
   </script>
 
@@ -128,6 +183,7 @@
   <script src="js/servicios.js" defer></script>
   <script src="js/form.js" defer></script>
 </head>
+
 
 <body>
   <div class="contenedor">
@@ -218,16 +274,16 @@
           </a>
         </div>
 
-<div class="portafolio-item">
-  <a href="#img6">
-    <picture>
-      <source srcset="img/img_portfolio/triptico.webp" type="image/webp">
-      <img src="img/img_portfolio/tripticoportfolio.jpg"
-        alt="Identidad visual para La Disquería: logotipo y aplicaciones"
-        width="800" height="800" loading="lazy" decoding="async">
-    </picture>
-  </a>
-</div>
+        <div class="portafolio-item">
+          <a href="#img6">
+            <picture>
+              <source srcset="img/img_portfolio/triptico.webp" type="image/webp">
+              <img src="img/img_portfolio/tripticoportfolio.jpg"
+                alt="Identidad visual para La Disquería: logotipo y aplicaciones" width="800" height="800"
+                loading="lazy" decoding="async">
+            </picture>
+          </a>
+        </div>
 
       </div>
     </section>
